@@ -2,9 +2,9 @@ development:
   dialect: "mysql"
   database: "worldlocations_development"
   host: "localhost"
-  port: "3306"
+  port: "6603"
   user: "root"
-  password: "root"
+  password: "mypassword"
 
 test:
   dialect: "mysql"
@@ -18,9 +18,9 @@ test:
   #
   database: "worldlocations_test"
   host: "localhost"
-  port: "3306"
+  port: "6603"
   user: "root"
-  password: "root"
+  password: "mypassword"
 
 production:
   #

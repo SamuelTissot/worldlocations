@@ -14,8 +14,11 @@ require (
 	github.com/gobuffalo/packr v1.21.7
 	github.com/gobuffalo/pop v4.9.3+incompatible
 	github.com/gobuffalo/suite v2.6.0+incompatible
+	github.com/gobuffalo/uuid v2.0.5+incompatible
+	github.com/gobuffalo/validate v2.0.3+incompatible
 	github.com/gobuffalo/x v0.0.0-20181110221217-14085ca3e1a9
 	github.com/markbates/grift v1.0.5
+	github.com/pkg/errors v0.8.0
 	github.com/rs/cors v1.6.0
 	github.com/unrolled/secure v0.0.0-20181221173256-0d6b5bb13069
 	golang.org/x/net v0.0.0-20181220203305-927f97764cc3 // indirect

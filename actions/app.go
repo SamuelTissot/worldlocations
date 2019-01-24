@@ -58,6 +58,11 @@ func App() *buffalo.App {
 		// Remove to disable this.
 		app.Use(popmw.Transaction(models.DB))
 
+		//v1 groupe
+		v1 := app.Group("/v1")
+		v1.Resource("/countries/", CountriesResource{})
+
+		//default home controller
 		app.GET("/", HomeHandler)
 
 	}
