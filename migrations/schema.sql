@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.24, for osx10.14 (x86_64)
 --
--- Host: localhost    Database: worldlocations_test
+-- Host: localhost    Database: worldlocations_development
 -- ------------------------------------------------------
 -- Server version	5.7.24
 
@@ -57,4 +57,4 @@ CREATE TABLE `schema_migration` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-03  9:06:25
+-- Dump completed on 2019-01-24  7:55:57
