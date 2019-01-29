@@ -4,9 +4,6 @@ import (
 	"encoding/json"
 	"github.com/gobuffalo/pop/nulls"
 	"time"
-
-	"github.com/gobuffalo/pop"
-	"github.com/gobuffalo/validate"
 )
 
 type CountryCode struct {
@@ -33,22 +30,4 @@ type CountryCodes []CountryCode
 func (c CountryCodes) String() string {
 	jc, _ := json.Marshal(c)
 	return string(jc)
-}
-
-// Validate gets run every time you call a "pop.Validate*" (pop.ValidateAndSave, pop.ValidateAndCreate, pop.ValidateAndUpdate) method.
-// This method is not required and may be deleted.
-func (c *CountryCode) Validate(tx *pop.Connection) (*validate.Errors, error) {
-	return validate.NewErrors(), nil
-}
-
-// ValidateCreate gets run every time you call "pop.ValidateAndCreate" method.
-// This method is not required and may be deleted.
-func (c *CountryCode) ValidateCreate(tx *pop.Connection) (*validate.Errors, error) {
-	return validate.NewErrors(), nil
-}
-
-// ValidateUpdate gets run every time you call "pop.ValidateAndUpdate" method.
-// This method is not required and may be deleted.
-func (c *CountryCode) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
-	return validate.NewErrors(), nil
 }

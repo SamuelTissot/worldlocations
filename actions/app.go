@@ -59,8 +59,10 @@ func App() *buffalo.App {
 		app.Use(popmw.Transaction(models.DB))
 
 		//v1 groupe
+		countries := Countries{}
 		v1 := app.Group("/v1")
-		v1.Resource("/countries/", CountriesResource{})
+		v1.GET("/countries/", countries.List)
+		v1.GET("/countries/{alpha_2_code}", countries.Show)
 
 		//default home controller
 		app.GET("/", HomeHandler)

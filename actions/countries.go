@@ -7,16 +7,12 @@ import (
 	"worldlocations/models"
 )
 
-type CountriesResource struct {
-	buffalo.Resource
-}
-
 type Countries struct {
 	Count int                  `json:"count"`
 	Data  *models.CountryCodes `json:"data"`
 }
 
-func (cr CountriesResource) List(c buffalo.Context) error {
+func (countries Countries) List(c buffalo.Context) error {
 	tx, ok := c.Value("tx").(*pop.Connection)
 	if !ok {
 		return errors.WithStack(errors.New("no transaction found"))
@@ -28,27 +24,25 @@ func (cr CountriesResource) List(c buffalo.Context) error {
 	if err := tx.All(countryCodes); err != nil {
 		return errors.WithStack(err)
 	}
-
-	countries := Countries{
+	cts := Countries{
 		Count: len(*countryCodes),
 		Data:  countryCodes,
 	}
 
-	return c.Render(200, r.JSON(countries))
+	return c.Render(200, r.JSON(cts))
 }
 
-func (cr CountriesResource) Show(c buffalo.Context) error {
+func (countries Countries) Show(c buffalo.Context) error {
 	tx, ok := c.Value("tx").(*pop.Connection)
 	if !ok {
 		return errors.WithStack(errors.New("no transaction found"))
 	}
 
-	country := &models.CountryCode{}
+	cts := &models.CountryCode{}
 
-	// To find the Widget the parameter widget_id is used.
-	if err := tx.Find(country, c.Param("alpha_2_code")); err != nil {
+	if err := tx.Where("alpha_2_code = (?)", c.Param("alpha_2_code")).First(cts); err != nil {
 		return c.Error(404, err)
 	}
 
-	return c.Render(200, r.Auto(c, country))
+	return c.Render(200, r.Auto(c, cts))
 }

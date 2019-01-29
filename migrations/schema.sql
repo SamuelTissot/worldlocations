@@ -23,15 +23,15 @@ DROP TABLE IF EXISTS `country_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `country_codes` (
-  `alpha_2_code` char(2) NOT NULL,
-  `alpha_3_code` char(3) DEFAULT NULL,
-  `numeric_code` int(11) DEFAULT NULL,
-  `international_name` varchar(255) DEFAULT NULL,
-  `is_independant` tinyint(4) DEFAULT NULL,
-  `iso_status` varchar(25) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`alpha_2_code`)
+                               `alpha_2_code`       varchar(2) NOT NULL,
+                               `alpha_3_code`       varchar(3)          DEFAULT NULL,
+                               `numeric_code`       int(11)             DEFAULT NULL,
+                               `international_name` varchar(255)        DEFAULT NULL,
+                               `is_independant`     tinyint(4)          DEFAULT NULL,
+                               `iso_status`         varchar(25)         DEFAULT NULL,
+                               `created_at`         datetime   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                               `updated_at`         datetime   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                               PRIMARY KEY (`alpha_2_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -57,4 +57,4 @@ CREATE TABLE `schema_migration` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-24  7:55:57
+-- Dump completed on 2019-01-28  8:21:03
