@@ -5,7 +5,7 @@ import (
 )
 
 func (as *ActionSuite) Test_Countries_List() {
-	as.LoadFixture("country codes exist")
+	as.LoadFixture("country_codes")
 	res := as.JSON("/v1/countries").Get()
 
 	as.Equal(200, res.Code)
@@ -19,7 +19,7 @@ func (as *ActionSuite) Test_Countries_List() {
 }
 
 func (as *ActionSuite) Test_Countries_Show() {
-	as.LoadFixture("country codes exist")
+	as.LoadFixture("country_codes")
 	res := as.JSON("/v1/countries/ca").Get()
 
 	as.Equal(200, res.Code)

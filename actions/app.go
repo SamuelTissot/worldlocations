@@ -3,14 +3,14 @@ package actions
 import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/envy"
-	forcessl "github.com/gobuffalo/mw-forcessl"
-	paramlogger "github.com/gobuffalo/mw-paramlogger"
+	"github.com/gobuffalo/mw-forcessl"
+	"github.com/gobuffalo/mw-paramlogger"
 	"github.com/unrolled/secure"
 
 	"worldlocations/models"
 
 	"github.com/gobuffalo/buffalo-pop/pop/popmw"
-	contenttype "github.com/gobuffalo/mw-contenttype"
+	"github.com/gobuffalo/mw-contenttype"
 	"github.com/gobuffalo/x/sessions"
 	"github.com/rs/cors"
 )
@@ -59,10 +59,17 @@ func App() *buffalo.App {
 		app.Use(popmw.Transaction(models.DB))
 
 		//v1 groupe
-		countries := Countries{}
 		v1 := app.Group("/v1")
+
+		// countries
+		countries := Countries{}
 		v1.GET("/countries/", countries.List)
 		v1.GET("/countries/{alpha_2_code}", countries.Show)
+
+		//subdivision
+		subdivisions := SubdivisionCodes{}
+		v1.GET("/subdivisions/", subdivisions.List)
+		v1.GET("/countries/{alpha_2_code}/subdivisions/", subdivisions.CountrySubdivisions)
 
 		//default home controller
 		app.GET("/", HomeHandler)

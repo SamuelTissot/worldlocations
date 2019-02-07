@@ -1,5 +1,5 @@
 [[scenario]]
-name = "country codes exist"
+name = "country_codes"
 
   [[scenario.table]]
     name = "country_codes"

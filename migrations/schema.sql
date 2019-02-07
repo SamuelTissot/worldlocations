@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.24, for osx10.14 (x86_64)
 --
--- Host: localhost    Database: worldlocations_development
+-- Host: localhost    Database: worldlocations_test
 -- ------------------------------------------------------
 -- Server version	5.7.24
 
@@ -47,6 +47,28 @@ CREATE TABLE `schema_migration` (
   UNIQUE KEY `schema_migration_version_idx` (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `subdivision_codes`
+--
+
+DROP TABLE IF EXISTS `subdivision_codes`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subdivision_codes`
+(
+  `subdivision_code`   varchar(6) NOT NULL,
+  `alpha_2_code`       varchar(2)          DEFAULT NULL,
+  `international_name` varchar(255)        DEFAULT NULL,
+  `category`           varchar(50)         DEFAULT NULL,
+  `created_at`         datetime   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`         datetime   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`subdivision_code`),
+  KEY `alpha_2_code` (`alpha_2_code`),
+  CONSTRAINT `subdivision_codes_ibfk_1` FOREIGN KEY (`alpha_2_code`) REFERENCES `country_codes` (`alpha_2_code`) ON DELETE CASCADE
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -57,4 +79,4 @@ CREATE TABLE `schema_migration` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-28  8:21:03
+-- Dump completed on 2019-02-07  8:03:12

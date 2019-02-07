@@ -1,6 +1,8 @@
 module worldlocations
 
 require (
+	github.com/cweill/gotests v1.5.2 // indirect
+	github.com/davecgh/go-spew v1.1.1
 	github.com/gobuffalo/buffalo v0.13.6
 	github.com/gobuffalo/buffalo-plugins v1.9.3 // indirect
 	github.com/gobuffalo/buffalo-pop v1.1.15
