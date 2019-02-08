@@ -1,0 +1,10 @@
+create_table("subdivision_codes") {
+    t.Column("subdivision_code", "string", {size: 6, primary: true})
+    t.Column("alpha_2_code", "string", {size: 2, "null": true})
+    t.Column("international_name", "string", {size: 255, "null": true})
+    t.Column("category", "string", {size: 50, "null": true})
+    t.Column("created_at", "datetime", {"default_raw": "NOW()"})
+    t.Column("updated_at", "datetime", {"default_raw": "NOW()"})
+    t.DisableTimestamps()
+    t.ForeignKey("alpha_2_code", {"country_codes": ["alpha_2_code"]}, {"on_delete": "cascade", "on_update": "cascade"})
+}

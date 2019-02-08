@@ -1,0 +1,23 @@
+create_table("language_codes") {
+    t.Column("language_alpha_2_code", "string", {size: 2, primary: true})
+    t.Column("language_alpha_3_code", "string", {size: 3, "null": true})
+    t.Column("created_at", "datetime", {"default_raw": "NOW()"})
+    t.Column("updated_at", "datetime", {"default_raw": "NOW()"})
+    t.DisableTimestamps()
+}
+
+create_table("subdivision_names") {
+    t.Column("subdivision_code", "string", {size: 6})
+    t.Column("language_alpha_2_code", "string", {size: 2})
+    t.Column("name", "string", {size: 255})
+    t.Column("local_variation", "string", {size: 255, "null": true})
+    t.Column("created_at", "datetime", {"default_raw": "NOW()"})
+    t.Column("updated_at", "datetime", {"default_raw": "NOW()"})
+    t.DisableTimestamps()
+    t.ForeignKey("subdivision_code", {"subdivision_codes": ["subdivision_code"]}, {"on_delete": "cascade", "on_update": "cascade"})
+    t.ForeignKey("language_alpha_2_code", {"language_codes": ["language_alpha_2_code"]}, {"on_delete": "cascade", "on_update": "cascade"})
+}
+sql("Alter Table subdivision_names ADD PRIMARY KEY (subdivision_code, language_alpha_2_code)")
+
+add_index("subdivision_names", ["subdivision_code", "language_alpha_2_code"], {})
+

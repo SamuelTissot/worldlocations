@@ -1,0 +1,2 @@
+drop_table("language_codes")
+drop_table("subdivision_names")
