@@ -3,6 +3,7 @@ package actions
 import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/envy"
+	"github.com/gobuffalo/mw-contenttype"
 	"github.com/gobuffalo/mw-forcessl"
 	"github.com/gobuffalo/mw-paramlogger"
 	"github.com/unrolled/secure"
@@ -10,7 +11,6 @@ import (
 	"worldlocations/models"
 
 	"github.com/gobuffalo/buffalo-pop/pop/popmw"
-	"github.com/gobuffalo/mw-contenttype"
 	"github.com/gobuffalo/x/sessions"
 	"github.com/rs/cors"
 )
@@ -64,12 +64,17 @@ func App() *buffalo.App {
 		// countries
 		countries := Countries{}
 		v1.GET("/countries/", countries.List)
-		v1.GET("/countries/{alpha_2_code}", countries.Show)
+		v1.GET("/countries/{alpha_2_code}/", countries.Show)
 
 		//subdivision
-		subdivisions := SubdivisionCodes{}
+		subdivisions := Subdivisions{}
 		v1.GET("/subdivisions/", subdivisions.List)
 		v1.GET("/countries/{alpha_2_code}/subdivisions/", subdivisions.CountrySubdivisions)
+
+		//languages
+		languages := Languages{}
+		v1.GET("/languages", languages.List)
+		v1.GET("/languages/{language_alpha_2_code}/", languages.Show)
 
 		//default home controller
 		app.GET("/", HomeHandler)

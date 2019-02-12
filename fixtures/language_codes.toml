@@ -1,0 +1,23 @@
+[[scenario]]
+name = "language_codes"
+
+  [[scenario.table]]
+    name = "language_codes"
+
+    [[scenario.table.row]]
+        language_alpha_2_code = "en"
+        language_alpha_3_code = "eng"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+    [[scenario.table.row]]
+        language_alpha_2_code = "fr"
+        language_alpha_3_code = "fra"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+     [[scenario.table.row]]
+         language_alpha_2_code = "es"
+         language_alpha_3_code = "spa"
+         created_at = "2019-01-03 08:52:06"
+         updated_at = "2019-01-03 08:52:06"
