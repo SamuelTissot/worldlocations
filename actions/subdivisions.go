@@ -7,12 +7,12 @@ import (
 	"worldlocations/models"
 )
 
-type SubdivisionCodes struct {
+type Subdivisions struct {
 	Count int                      `json:"count"`
 	Data  *models.SubdivisionCodes `json:"data"`
 }
 
-func (scs SubdivisionCodes) List(c buffalo.Context) error {
+func (scs Subdivisions) List(c buffalo.Context) error {
 	tx, ok := c.Value("tx").(*pop.Connection)
 	if !ok {
 		return errors.WithStack(errors.New("no transaction found"))
@@ -22,7 +22,7 @@ func (scs SubdivisionCodes) List(c buffalo.Context) error {
 	if err := tx.All(subCodes); err != nil {
 		return errors.WithStack(err)
 	}
-	subCodeRes := SubdivisionCodes{
+	subCodeRes := Subdivisions{
 		Count: len(*subCodes),
 		Data:  subCodes,
 	}
@@ -30,7 +30,7 @@ func (scs SubdivisionCodes) List(c buffalo.Context) error {
 	return c.Render(200, r.JSON(subCodeRes))
 }
 
-func (scs SubdivisionCodes) CountrySubdivisions(c buffalo.Context) error {
+func (scs Subdivisions) CountrySubdivisions(c buffalo.Context) error {
 	tx, ok := c.Value("tx").(*pop.Connection)
 	if !ok {
 		return errors.WithStack(errors.New("no transaction found"))
@@ -41,7 +41,7 @@ func (scs SubdivisionCodes) CountrySubdivisions(c buffalo.Context) error {
 		return c.Error(404, err)
 	}
 
-	subdivisionsRes := SubdivisionCodes{
+	subdivisionsRes := Subdivisions{
 		Count: len(*scsq),
 		Data:  scsq,
 	}

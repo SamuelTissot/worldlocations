@@ -71,6 +71,11 @@ func App() *buffalo.App {
 		v1.GET("/subdivisions/", subdivisions.List)
 		v1.GET("/countries/{alpha_2_code}/subdivisions/", subdivisions.CountrySubdivisions)
 
+		//subdivision Names
+		subdivisionNames := SubdivisionNames{}
+		v1.GET("subdivisions/names/", subdivisionNames.List)
+		v1.GET("subdivisions/{subdivision_code}/names/", subdivisionNames.Show)
+
 		//languages
 		languages := Languages{}
 		v1.GET("/languages", languages.List)

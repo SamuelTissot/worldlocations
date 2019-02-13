@@ -76,7 +76,7 @@ func (as *ActionSuite) Test_SubdivisionCodes_CountrySubdivisions() {
 		res := as.JSON(fmt.Sprintf("/v1/countries/%s/subdivisions/", tt.alpha2Code)).Get()
 		as.Equal(200, res.Code)
 
-		scs := SubdivisionCodes{}
+		scs := Subdivisions{}
 		err := json.Unmarshal(res.Body.Bytes(), &scs)
 		if err != nil {
 			as.FailNow(err.Error())
