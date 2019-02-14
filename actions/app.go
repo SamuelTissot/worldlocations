@@ -81,6 +81,13 @@ func App() *buffalo.App {
 		v1.GET("/languages", languages.List)
 		v1.GET("/languages/{language_alpha_2_code}/", languages.Show)
 
+		// cities
+		cities := Cities{}
+		v1.GET("cities/", cities.List)
+		v1.GET("cities/{id}", cities.Show)
+		v1.GET("countries/{alpha_2_code}/cities/", cities.CountryCities)
+		v1.GET("subdivision/{subdivision_code}/cities}/", cities.CountryCities)
+
 		//default home controller
 		app.GET("/", HomeHandler)
 

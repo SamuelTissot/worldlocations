@@ -1,0 +1,95 @@
+[[scenario]]
+name = "cities"
+
+ [[scenario.table]]
+    name = "country_codes"
+
+    [[scenario.table.row]]
+        alpha_2_code = "US"
+        alpha_3_code = "USA"
+        numeric_code = 840
+        international_name = "United States of America (the)"
+        is_independant = 1
+        iso_status = "officially-assigned"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+    [[scenario.table.row]]
+        alpha_2_code = "CA"
+        alpha_3_code = "CAN"
+        numeric_code = 124
+        international_name = "Canada"
+        is_independant = 1
+        iso_status = "officially-assigned"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+ [[scenario.table]]
+    name = "subdivision_codes"
+
+    [[scenario.table.row]]
+        subdivision_code = "US-NY"
+        alpha_2_code = "US"
+        international_name = "New-York"
+        category = "State"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+    [[scenario.table.row]]
+        subdivision_code = "CA-QC"
+        alpha_2_code = "CA"
+        international_name = "Quebec"
+        category = "Province"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+ [[scenario.table]]
+    name = "cities"
+
+    [[scenario.table.row]]
+        id = 1
+        alpha_2_code = "CA"
+        subdivision_code = "CA-QC"
+        locode = "MTR"
+        name = "Montreal"
+        international_name = "Montreal"
+        iata_code = "YMQ"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+    [[scenario.table.row]]
+        id = 2
+        alpha_2_code = "CA"
+        subdivision_code = "CA-QC"
+        locode = "LDT"
+        name = "Lac-Drolet"
+        international_name = "Lac-Drolet"
+        iata_code = "LDT"
+        latitude_longitude = "4543N 07051W"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+    [[scenario.table.row]]
+        id = 3
+        alpha_2_code = "US"
+        subdivision_code = "US-NY"
+        locode = "YWG"
+        name = "Woodridge"
+        international_name = "Woodridge"
+        iata_code = ""
+        latitude_longitude = "4142N 07434W"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+    [[scenario.table.row]]
+        id = 4
+        alpha_2_code = "US"
+        subdivision_code = "US-NY"
+        locode = "YTW"
+        name = "Youngstown"
+        international_name = "Youngstown"
+        iata_code = ""
+        latitude_longitude = "4314N 07903W"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+

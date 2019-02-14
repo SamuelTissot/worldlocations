@@ -1,0 +1,19 @@
+create_table("cities") {
+    t.Column("id", "uuid", {primary: true})
+	t.Column("alpha_2_code", "string", {size: 2})
+	t.Column("subdivision_code", "string", {size: 6})
+	t.Column("locode", "string", {size: 3})
+	t.Column("name", "string", {size: 255})
+	t.Column("international_name", "string", {size: 255, "null": true})
+	t.Column("iata_code", "string", {size: 3, "null": true})
+	t.Column("latitude_longitude", "string", {size: 12, "null": true})
+	t.Column("created_at", "datetime", {"default_raw": "NOW()"})
+	t.Column("updated_at", "datetime", {"default_raw": "NOW()"})
+	t.DisableTimestamps()
+
+	t.ForeignKey("alpha_2_code", {"country_codes": ["alpha_2_code"]}, {})
+	t.ForeignKey("subdivision_code", {"subdivision_codes": ["subdivision_code"]}, {"on_delete": "cascade"})
+}
+
+add_index("cities", "alpha_2_code", {})
+add_index("cities", "subdivision_code", {})
