@@ -43,6 +43,14 @@ name = "cities"
         created_at = "2019-01-03 08:52:06"
         updated_at = "2019-01-03 08:52:06"
 
+    [[scenario.table.row]]
+            subdivision_code = "CA-ON"
+            alpha_2_code = "CA"
+            international_name = "Ontario"
+            category = "Province"
+            created_at = "2019-01-03 08:52:06"
+            updated_at = "2019-01-03 08:52:06"
+
  [[scenario.table]]
     name = "cities"
 
@@ -54,6 +62,7 @@ name = "cities"
         name = "Montreal"
         international_name = "Montreal"
         iata_code = "YMQ"
+        latitude_longitude = ""
         created_at = "2019-01-03 08:52:06"
         updated_at = "2019-01-03 08:52:06"
 
@@ -66,6 +75,18 @@ name = "cities"
         international_name = "Lac-Drolet"
         iata_code = "LDT"
         latitude_longitude = "4543N 07051W"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+    [[scenario.table.row]]
+        id = 5
+        alpha_2_code = "CA"
+        subdivision_code = "CA-ON"
+        locode = "WFI"
+        name = "Wolfe Island"
+        international_name = "Wolfe Island"
+        iata_code = "WFI"
+        latitude_longitude = "4411N 07626W"
         created_at = "2019-01-03 08:52:06"
         updated_at = "2019-01-03 08:52:06"
 
@@ -92,4 +113,3 @@ name = "cities"
         latitude_longitude = "4314N 07903W"
         created_at = "2019-01-03 08:52:06"
         updated_at = "2019-01-03 08:52:06"
-

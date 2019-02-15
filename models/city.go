@@ -2,12 +2,11 @@ package models
 
 import (
 	"encoding/json"
-	"github.com/gobuffalo/uuid"
 	"time"
 )
 
 type City struct {
-	ID                uuid.UUID `db:"id"`
+	ID                int       `db:"id"`
 	Alpha2Code        string    `json:"alpha_2_code" db:"alpha_2_code"`
 	SubdivisionCode   string    `json:"subdivision_code" db:"subdivision_code"`
 	Locode            string    `json:"locode" db:"locode"`

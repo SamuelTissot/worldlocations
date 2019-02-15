@@ -19,6 +19,7 @@ require (
 	github.com/gobuffalo/uuid v2.0.5+incompatible
 	github.com/gobuffalo/validate v2.0.3+incompatible
 	github.com/gobuffalo/x v0.0.0-20181110221217-14085ca3e1a9
+	github.com/gofrs/uuid v3.1.0+incompatible
 	github.com/markbates/grift v1.0.5
 	github.com/pkg/errors v0.8.0
 	github.com/rs/cors v1.6.0

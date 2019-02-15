@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `cities`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cities`
 (
-  `id`                 char(36)     NOT NULL,
+  `id`                 int(11)      NOT NULL AUTO_INCREMENT,
   `alpha_2_code`       varchar(2)   NOT NULL,
   `subdivision_code`   varchar(6)   NOT NULL,
   `locode`             varchar(3)   NOT NULL,
@@ -149,4 +149,4 @@ CREATE TABLE `subdivision_names`
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-14  7:44:30
+-- Dump completed on 2019-02-15  7:43:51

@@ -37,14 +37,14 @@ func (cs Cities) Show(c buffalo.Context) error {
 		return errors.WithStack(errors.New("no transaction found"))
 	}
 
-	cm := &models.Cities{}
-	if err := tx.Where("id = (?)", c.Param("id")).All(cm); err != nil {
+	cm := &models.City{}
+	if err := tx.Find(cm, c.Param("id")); err != nil {
 		return c.Error(404, err)
 	}
 
 	res := Cities{
-		Count: len(*cm),
-		Data:  cm,
+		Count: 1,
+		Data:  &models.Cities{*cm},
 	}
 
 	return c.Render(200, r.JSON(res))
