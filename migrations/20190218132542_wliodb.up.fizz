@@ -1,0 +1,97 @@
+create_table("country_codes") {
+	t.Column("alpha_2_code", "string", {size: 2, primary: true})
+	t.Column("alpha_3_code", "string", {size: 3, "null": true})
+	t.Column("numeric_code", "int", {"null": true})
+	t.Column("international_name", "string", {size: 255, "null": true})
+	t.Column("is_independant", "tinyint", {"null": true})
+	t.Column("iso_status", "string", {size: 25, "null": true})
+	t.Column("created_at", "datetime", {"default_raw": "NOW()"})
+	t.Column("updated_at", "datetime", {"default_raw": "NOW()"})
+	t.DisableTimestamps()
+}
+
+
+create_table("subdivision_codes") {
+    t.Column("subdivision_code", "string", {size: 6, primary: true})
+    t.Column("alpha_2_code", "string", {size: 2, "null": true})
+    t.Column("international_name", "string", {size: 255, "null": true})
+    t.Column("category", "string", {size: 50, "null": true})
+    t.Column("created_at", "datetime", {"default_raw": "NOW()"})
+    t.Column("updated_at", "datetime", {"default_raw": "NOW()"})
+    t.DisableTimestamps()
+    t.ForeignKey("alpha_2_code", {"country_codes": ["alpha_2_code"]}, {"on_delete": "cascade", "on_update": "cascade"})
+}
+
+create_table("cities") {
+    t.Column("id", "integer", {primary: true})
+	t.Column("alpha_2_code", "string", {size: 2})
+	t.Column("subdivision_code", "string", {size: 6})
+	t.Column("locode", "string", {size: 3})
+	t.Column("name", "string", {size: 255})
+	t.Column("international_name", "string", {size: 255, "null": true})
+	t.Column("iata_code", "string", {size: 3, "null": true})
+	t.Column("latitude_longitude", "string", {size: 12, "null": true})
+	t.Column("created_at", "datetime", {"default_raw": "NOW()"})
+	t.Column("updated_at", "datetime", {"default_raw": "NOW()"})
+	t.DisableTimestamps()
+	t.ForeignKey("alpha_2_code", {"country_codes": ["alpha_2_code"]}, {})
+	t.ForeignKey("subdivision_code", {"subdivision_codes": ["subdivision_code"]}, {"on_delete": "cascade"})
+}
+add_index("cities", "alpha_2_code", {})
+add_index("cities", "subdivision_code", {})
+
+
+create_table("language_codes") {
+    t.Column("language_alpha_2_code", "string", {size: 2, primary: true})
+    t.Column("language_alpha_3_code", "string", {size: 3, "null": true})
+    t.Column("created_at", "datetime", {"default_raw": "NOW()"})
+    t.Column("updated_at", "datetime", {"default_raw": "NOW()"})
+    t.DisableTimestamps()
+}
+
+
+create_table("subdivision_names") {
+    t.Column("subdivision_code", "string", {size: 6})
+    t.Column("language_alpha_2_code", "string", {size: 2})
+    t.Column("name", "string", {size: 255})
+    t.Column("local_variation", "string", {size: 255, "null": true})
+    t.Column("created_at", "datetime", {"default_raw": "NOW()"})
+    t.Column("updated_at", "datetime", {"default_raw": "NOW()"})
+    t.DisableTimestamps()
+    t.ForeignKey("subdivision_code", {"subdivision_codes": ["subdivision_code"]}, {"on_delete": "cascade", "on_update": "cascade"})
+    t.ForeignKey("language_alpha_2_code", {"language_codes": ["language_alpha_2_code"]}, {"on_delete": "cascade", "on_update": "cascade"})
+}
+sql("Alter Table subdivision_names ADD PRIMARY KEY (subdivision_code, language_alpha_2_code)")
+add_index("subdivision_names", ["subdivision_code", "language_alpha_2_code"], {})
+
+
+create_table("country_languages") {
+    t.Column("id", "integer", {primary: true})
+    t.Column("alpha_2_code", "string", {size: 2})
+    t.Column("language_alpha_2_code", "string", {size: 2})
+    t.Column("is_administrative", "tinyint")
+    t.Column("sorting_order", "string", {size: 45, "null": true})
+    t.Column("created_at", "datetime", {"default_raw": "NOW()"})
+    t.Column("updated_at", "datetime", {"default_raw": "NOW()"})
+    t.DisableTimestamps()
+    t.ForeignKey("alpha_2_code", {"country_codes": ["alpha_2_code"]}, {})
+    t.ForeignKey("language_alpha_2_code", {"language_codes": ["language_alpha_2_code"]}, {})
+}
+add_index("country_languages", "alpha_2_code", {})
+add_index("country_languages", "language_alpha_2_code", {})
+
+
+create_table("country_names") {
+    t.Column("id", "integer", {primary: true})
+    t.Column("alpha_2_code", "string", {size: 2})
+    t.Column("language_alpha_2_code", "string", {size: 2})
+    t.Column("name", "string", {size: 255})
+    t.Column("full_name", "string", {size: 255, "null": true})
+    t.Column("created_at", "datetime", {"default_raw": "NOW()"})
+    t.Column("updated_at", "datetime", {"default_raw": "NOW()"})
+    t.DisableTimestamps()
+    t.ForeignKey("alpha_2_code", {"country_codes": ["alpha_2_code"]}, {})
+    t.ForeignKey("language_alpha_2_code", {"language_codes": ["language_alpha_2_code"]}, {})
+}
+add_index("country_names", "alpha_2_code", {})
+add_index("country_names", "language_alpha_2_code", {})

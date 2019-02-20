@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.24, for osx10.14 (x86_64)
 --
--- Host: localhost    Database: worldlocations_development
+-- Host: localhost    Database: worldlocations_test
 -- ------------------------------------------------------
 -- Server version	5.7.24
 
@@ -64,6 +64,56 @@ CREATE TABLE `country_codes` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `country_languages`
+--
+
+DROP TABLE IF EXISTS `country_languages`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `country_languages`
+(
+  `id`                    int(11)    NOT NULL AUTO_INCREMENT,
+  `alpha_2_code`          varchar(2) NOT NULL,
+  `language_alpha_2_code` varchar(2) NOT NULL,
+  `is_administrative`     tinyint(4) NOT NULL,
+  `sorting_order`         varchar(45)         DEFAULT NULL,
+  `created_at`            datetime   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`            datetime   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `country_languages_alpha_2_code_idx` (`alpha_2_code`),
+  KEY `country_languages_language_alpha_2_code_idx` (`language_alpha_2_code`),
+  CONSTRAINT `country_languages_ibfk_1` FOREIGN KEY (`alpha_2_code`) REFERENCES `country_codes` (`alpha_2_code`),
+  CONSTRAINT `country_languages_ibfk_2` FOREIGN KEY (`language_alpha_2_code`) REFERENCES `language_codes` (`language_alpha_2_code`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `country_names`
+--
+
+DROP TABLE IF EXISTS `country_names`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `country_names`
+(
+  `id`                    int(11)      NOT NULL AUTO_INCREMENT,
+  `alpha_2_code`          varchar(2)   NOT NULL,
+  `language_alpha_2_code` varchar(2)   NOT NULL,
+  `name`                  varchar(255) NOT NULL,
+  `full_name`             varchar(255)          DEFAULT NULL,
+  `created_at`            datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`            datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `country_names_alpha_2_code_idx` (`alpha_2_code`),
+  KEY `country_names_language_alpha_2_code_idx` (`language_alpha_2_code`),
+  CONSTRAINT `country_names_ibfk_1` FOREIGN KEY (`alpha_2_code`) REFERENCES `country_codes` (`alpha_2_code`),
+  CONSTRAINT `country_names_ibfk_2` FOREIGN KEY (`language_alpha_2_code`) REFERENCES `language_codes` (`language_alpha_2_code`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `language_codes`
 --
 
@@ -111,7 +161,7 @@ CREATE TABLE `subdivision_codes`
   `updated_at`         datetime   NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`subdivision_code`),
   KEY `alpha_2_code` (`alpha_2_code`),
-  CONSTRAINT `subdivision_codes_ibfk_1` FOREIGN KEY (`alpha_2_code`) REFERENCES `country_codes` (`alpha_2_code`) ON DELETE CASCADE
+  CONSTRAINT `subdivision_codes_ibfk_1` FOREIGN KEY (`alpha_2_code`) REFERENCES `country_codes` (`alpha_2_code`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -149,4 +199,4 @@ CREATE TABLE `subdivision_names`
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-15  7:43:51
+-- Dump completed on 2019-02-20  6:59:30
