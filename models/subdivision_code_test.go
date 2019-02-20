@@ -45,7 +45,7 @@ func TestSubdivisionCode_String(t *testing.T) {
 				CreatedAt:         tnow,
 				UpdatedAt:         tnow,
 			},
-			want: fmt.Sprintf("{\"subdivision_code\":\"BF-KOP\",\"alpha_2_code\":\"BF\",\"international_name\":\"Koulpélogo\",\"category\":\"Province\",\"created_at\":\"%[1]s\",\"updated_at\":\"%[1]s\"}", tnow.Format("2006-01-02T15:04:05.999999-07:00")),
+			want: fmt.Sprintf("{\"subdivision_code\":\"BF-KOP\",\"alpha_2_code\":\"BF\",\"international_name\":\"Koulpélogo\",\"category\":\"\",\"created_at\":\"%[1]s\",\"updated_at\":\"%[1]s\"}", tnow.Format("2006-01-02T15:04:05.999999-07:00")),
 		},
 	}
 	for _, tt := range tests {
