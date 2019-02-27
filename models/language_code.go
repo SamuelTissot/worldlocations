@@ -23,3 +23,7 @@ func (lcs LanguageCodes) String() string {
 	jc, _ := json.Marshal(lcs)
 	return string(jc)
 }
+
+func (lcs LanguageCodes) Count() int {
+	return len(lcs)
+}

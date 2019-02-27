@@ -16,7 +16,7 @@ type SubdivisionCode struct {
 }
 
 // String is not required by pop and may be deleted
-func (sc *SubdivisionCode) String() string {
+func (sc SubdivisionCode) String() string {
 	jc, _ := json.Marshal(sc)
 	return string(jc)
 }
@@ -25,7 +25,11 @@ func (sc *SubdivisionCode) String() string {
 type SubdivisionCodes []SubdivisionCode
 
 // String is not required by pop and may be deleted
-func (scs *SubdivisionCodes) String() string {
+func (scs SubdivisionCodes) String() string {
 	jc, _ := json.Marshal(scs)
 	return string(jc)
+}
+
+func (scs SubdivisionCodes) Count() int {
+	return len(scs)
 }

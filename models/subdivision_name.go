@@ -26,3 +26,7 @@ func (sns SubdivisionNames) String() string {
 	jc, _ := json.Marshal(sns)
 	return string(jc)
 }
+
+func (sns SubdivisionNames) Count() int {
+	return len(sns)
+}

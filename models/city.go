@@ -32,3 +32,7 @@ func (cs *Cities) String() string {
 	jc, _ := json.Marshal(cs)
 	return string(jc)
 }
+
+func (cs Cities) Count() int {
+	return len(cs)
+}

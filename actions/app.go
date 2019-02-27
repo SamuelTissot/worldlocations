@@ -60,33 +60,27 @@ func App() *buffalo.App {
 
 		//v1 groupe
 		v1 := app.Group("/v1")
-
 		// countries
-		countries := Countries{}
-		v1.GET("/countries/", countries.List)
-		v1.GET("/countries/{alpha_2_code}/", countries.Show)
-
-		//subdivision
-		subdivisions := Subdivisions{}
-		v1.GET("/subdivisions/", subdivisions.List)
-		v1.GET("/countries/{alpha_2_code}/subdivisions/", subdivisions.CountrySubdivisions)
-
+		inquiry := Inquiry{}
+		v1.GET("/countries/", v1Handler(inquiry.countryList))
+		v1.GET("/countries/{alpha_2_code}/", v1Handler(inquiry.countryShow))
+		v1.GET("/countries/{alpha_2_code}/names", v1Handler(inquiry.countryNames))
+		v1.GET("/countries-names/", v1Handler(inquiry.countriesNamesList))
 		//subdivision Names
-		subdivisionNames := SubdivisionNames{}
-		v1.GET("subdivisions/names/", subdivisionNames.List)
-		v1.GET("subdivisions/{subdivision_code}/names/", subdivisionNames.Show)
-
+		v1.GET("/subdivisions/names", v1Handler(inquiry.subdivisionNamesList))
+		v1.GET("/subdivisions/{subdivision_code}/names/", v1Handler(inquiry.subdivisionNamesShow))
+		//subdivision
+		v1.GET("/subdivisions/", v1Handler(inquiry.subdivisionList))
+		v1.GET("/subdivisions/{subdivision_code}/", v1Handler(inquiry.subdivisionShow))
+		v1.GET("/countries/{alpha_2_code}/subdivisions/", v1Handler(inquiry.countrySubdivisions))
 		//languages
-		languages := Languages{}
-		v1.GET("/languages", languages.List)
-		v1.GET("/languages/{language_alpha_2_code}/", languages.Show)
-
+		v1.GET("/languages/", v1Handler(inquiry.languagesList))
+		v1.GET("/languages/{language_alpha_2_code}/", v1Handler(inquiry.languagesShow))
 		// cities
-		cities := Cities{}
-		v1.GET("cities/", cities.List)
-		v1.GET("cities/{id}", cities.Show)
-		v1.GET("countries/{alpha_2_code}/cities/", cities.CountryCities)
-		v1.GET("subdivisions/{subdivision_code}/cities/", cities.SubdivisionCities)
+		v1.GET("cities/", v1Handler(inquiry.citiesList))
+		v1.GET("cities/{id}", v1Handler(inquiry.citiesShow))
+		v1.GET("countries/{alpha_2_code}/cities/", v1Handler(inquiry.countryCities))
+		v1.GET("subdivisions/{subdivision_code}/cities/", v1Handler(inquiry.subdivisionCities))
 
 		//default home controller
 		app.GET("/", HomeHandler)

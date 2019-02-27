@@ -1,0 +1,77 @@
+[[scenario]]
+name = "country_names"
+
+  [[scenario.table]]
+     name = "country_codes"
+
+    [[scenario.table.row]]
+        alpha_2_code = "US"
+        alpha_3_code = "USA"
+        numeric_code = 840
+        international_name = "United States of America (the)"
+        is_independant = 1
+        iso_status = "officially-assigned"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+    [[scenario.table.row]]
+        alpha_2_code = "CA"
+        alpha_3_code = "CAN"
+        numeric_code = 124
+        international_name = "Canada"
+        is_independant = 1
+        iso_status = "officially-assigned"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+  [[scenario.table]]
+      name = "language_codes"
+
+      [[scenario.table.row]]
+        language_alpha_2_code = "en"
+        language_alpha_3_code = "eng"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+      [[scenario.table.row]]
+        language_alpha_2_code = "fr"
+        language_alpha_3_code = "fra"
+        created_at = "2019-01-03 08:52:06"
+        updated_at = "2019-01-03 08:52:06"
+
+  [[scenario.table]]
+        name = "country_names"
+
+        [[scenario.table.row]]
+            id = 1
+            alpha_2_code = "CA"
+            language_alpha_2_code = "en"
+            name = "Canada"
+            created_at = "2019-01-03 08:52:06"
+            updated_at = "2019-01-03 08:52:06"
+
+        [[scenario.table.row]]
+            id = 2
+            alpha_2_code = "CA"
+            language_alpha_2_code = "fr"
+            name = "Canada (le)"
+            created_at = "2019-01-03 08:52:06"
+            updated_at = "2019-01-03 08:52:06"
+
+        [[scenario.table.row]]
+            id = 3
+            alpha_2_code = "US"
+            language_alpha_2_code = "en"
+            name = "United States of America (the)"
+            full_name = "the United States of America"
+            created_at = "2019-01-03 08:52:06"
+            updated_at = "2019-01-03 08:52:06"
+
+        [[scenario.table.row]]
+            id = 4
+            alpha_2_code = "US"
+            language_alpha_2_code = "fr"
+            name = "États-Unis d'Amérique (les)"
+            full_name = "les États-Unis d'Amérique"
+            created_at = "2019-01-03 08:52:06"
+            updated_at = "2019-01-03 08:52:06"

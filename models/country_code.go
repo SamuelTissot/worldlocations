@@ -31,3 +31,7 @@ func (c CountryCodes) String() string {
 	jc, _ := json.Marshal(c)
 	return string(jc)
 }
+
+func (c CountryCodes) Count() int {
+	return len(c)
+}
