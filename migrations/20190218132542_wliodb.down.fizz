@@ -1,20 +1,14 @@
-drop_table("country_codes")
 
-drop_table("subdivision_codes")
+drop_table("country_names")
 
-drop_table("cities")
-drop_index("cities", "alpha_2_code")
-drop_index("cities", "subdivision_code")
+drop_table("country_languages")
+
+drop_table("subdivision_names")
 
 drop_table("language_codes")
 
-drop_table("subdivision_names")
-drop_index("subdivision_names", ["subdivision_code", "language_alpha_2_code"])
+drop_table("cities")
 
-drop_table("country_languages")
-drop_index("country_languages", "alpha_2_code")
-drop_index("country_languages", "language_alpha_2_code")
+drop_table("subdivision_codes")
 
-drop_table("country_names")
-drop_index("country_names", "alpha_2_code")
-drop_index("country_names", "language_alpha_2_code")
+drop_table("country_codes")
