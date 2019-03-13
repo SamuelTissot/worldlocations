@@ -1,0 +1,28 @@
+runtime: custom
+env: flex
+
+manual_scaling:
+  instances: 1
+
+skip_files:
+  - .cicleci/
+  - README.md
+
+readiness_check:
+  path:               "/"
+  check_interval_sec: 30
+  timeout_sec:        4
+  failure_threshold:  2
+  success_threshold:  2
+
+liveness_check:
+  path: "/"
+  check_interval_sec: 120
+  timeout_sec: 6
+  failure_threshold: 2
+  success_threshold: 2
+
+env_variables:
+  DATABASE_PASSWORD: "ADtVIKotvspyJGqmehTz0Di5kPTgliCV"
+  SQL_INSTANCES_NAMES: "worldlocation-io:us-central1:worldlocation-db=tcp:3306"
+  GO_ENV: "production"
