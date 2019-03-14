@@ -57,9 +57,10 @@ jobs:
           name: go get
           command:  |
             go get -u -v github.com/gobuffalo/buffalo/buffalo@v0.13.6
+            go get github.com/gobuffalo/buffalo-pop
       - run:
           name: provision test database
-          command: buffalo db migrate reset -e test
+          command: buffalo pop migrate reset -e test
       # TESTS
       - run: go test -v ./...
       # build if test passes
