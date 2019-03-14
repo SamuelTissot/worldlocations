@@ -33,16 +33,9 @@ jobs:
           paths:
             - .
   # --------BUILD && TEST-------------
-  test_and_build:
+  tests:
     executor: workhorse
     steps:
-      - run:
-          name:    Avoid hosts unknown for github
-          command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-      - run:
-          name: fix github
-          command: |
-            git config --global url.git@github.com:.insteadOf https://github.com/
       - attach_workspace:
           at: .
       # try to use the cache
@@ -56,22 +49,14 @@ jobs:
       - run:
           name: go get
           command:  |
-            go get -u -v github.com/gobuffalo/buffalo/buffalo@v0.13.6
+            go get -u -v github.com/gobuffalo/buffalo/buffalo
             go get github.com/gobuffalo/buffalo-pop
       - run:
           name: provision test database
           command: buffalo pop migrate reset -e test
       # TESTS
       - run: go test -v ./...
-      # build if test passes
-      - run: env GOOS=linux GOARCH=amd64 go build -v -o bin/leadservice
-      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
-      - persist_to_workspace:
-          root: .
-          paths:
-            - secrets
-            - bin
-            - Dockerfile
+
       # save cache
       - save_cache:
           key: go-mod-v1-{{ checksum "go.sum" }}
@@ -144,7 +129,7 @@ workflows:
   #            branches:
   #              ignore: master
   #      # test and build.
-  #      - test_and_build:
+  #      - tests:
   ##          context: mkt-wlio-dev
   #          requires:
   #            - gitclone
@@ -163,7 +148,7 @@ workflows:
   #      - deploy:
   #          context: mkt-wlio-dev
   #          requires:
-  #            - test_and_build
+  #            - tests
   #            - inject_env_vars
   #          filters:
   #            branches:
@@ -179,7 +164,7 @@ workflows:
             branches:
               only: master
       # test and build.
-      - test_and_build:
+      - tests:
           context: wlio-stg
           requires:
             - gitclone
@@ -198,7 +183,7 @@ workflows:
   #      - deploy:
   #          context: wlio-stg
   #          requires:
-  #            - test_and_build
+  #            - tests
   #            - inject_env_vars
   #          filters:
   #            branches:
@@ -216,7 +201,7 @@ workflows:
 #            branches:
 #              ignore: /.*/
 #      # test and build.
-#      - test_and_build:
+#      - tests:
 #          context: mkt-wlio-prod
 #          requires:
 #            - gitclone
@@ -239,7 +224,7 @@ workflows:
 #      - deploy:
 #          context: mkt-wlio-prod
 #          requires:
-#            - test_and_build
+#            - tests
 #            - inject_env_vars
 #          filters:
 #            tags:

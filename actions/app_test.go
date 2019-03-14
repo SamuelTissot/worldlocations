@@ -3,7 +3,7 @@ package actions
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gobuffalo/pop/nulls"
+	"github.com/gobuffalo/nulls"
 	"strings"
 	"time"
 	"worldlocations/models"
