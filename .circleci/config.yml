@@ -51,7 +51,7 @@ jobs:
           command:  |
             cd /tmp
             go get -u -v github.com/gobuffalo/buffalo/buffalo
-            buffalo plugins install github.com/gobuffalo/buffalo-pop
+            go get -u -v github.com/gobuffalo/buffalo-plugins
             cd -
       - run:
           name: provision test database
