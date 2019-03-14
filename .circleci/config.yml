@@ -49,9 +49,10 @@ jobs:
       - run:
           name: go get
           command:  |
+            cd /tmp
             go get -u -v github.com/gobuffalo/buffalo/buffalo
-            go get github.com/gobuffalo/buffalo-pop
             buffalo plugins install github.com/gobuffalo/buffalo-pop
+            cd -
       - run:
           name: provision test database
           command: buffalo pop migrate reset -e test
