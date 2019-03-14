@@ -2,7 +2,7 @@ package models
 
 import (
 	"fmt"
-	"github.com/gobuffalo/pop/nulls"
+	"github.com/gobuffalo/nulls"
 	"strings"
 	"testing"
 	"time"
@@ -14,7 +14,7 @@ func Test_CountryCode(t *testing.T) {
 		Alpha3Code:        "CAN",
 		NumericCode:       nulls.NewInt(124),
 		InternationalName: "Canada",
-		IsIndependent:     nulls.NewInt(1),
+		IsIndependent:     nulls.NewInt64(1),
 		IsoStatus:         "officially-assigned",
 		CreatedAt:         time.Now(),
 		UpdatedAt:         time.Now(),

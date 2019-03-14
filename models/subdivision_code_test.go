@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gobuffalo/pop/nulls"
+	"github.com/gobuffalo/nulls"
 )
 
 func TestSubdivisionCode_String(t *testing.T) {

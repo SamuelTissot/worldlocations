@@ -2,7 +2,7 @@ package models
 
 import (
 	"encoding/json"
-	"github.com/gobuffalo/pop/nulls"
+	"github.com/gobuffalo/nulls"
 	"time"
 )
 
