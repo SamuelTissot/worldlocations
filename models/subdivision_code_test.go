@@ -33,7 +33,7 @@ func TestSubdivisionCode_String(t *testing.T) {
 				CreatedAt:         tnow,
 				UpdatedAt:         tnow,
 			},
-			want: fmt.Sprintf("{\"subdivision_code\":\"BF-KOP\",\"alpha_2_code\":\"BF\",\"international_name\":\"Koulpélogo\",\"category\":\"Province\",\"created_at\":\"%[1]s\",\"updated_at\":\"%[1]s\"}", tnow.Format("2006-01-02T15:04:05.999999-07:00")),
+			want: fmt.Sprintf("{\"subdivision_code\":\"BF-KOP\",\"alpha_2_code\":\"BF\",\"international_name\":\"Koulpélogo\",\"category\":\"Province\",\"created_at\":\"%[1]s\",\"updated_at\":\"%[1]s\"}", tnow.Format("2006-01-02T15:04:05.999999Z07:00")),
 		},
 		{
 			name: "with nulls",
@@ -45,7 +45,7 @@ func TestSubdivisionCode_String(t *testing.T) {
 				CreatedAt:         tnow,
 				UpdatedAt:         tnow,
 			},
-			want: fmt.Sprintf("{\"subdivision_code\":\"BF-KOP\",\"alpha_2_code\":\"BF\",\"international_name\":\"Koulpélogo\",\"category\":\"\",\"created_at\":\"%[1]s\",\"updated_at\":\"%[1]s\"}", tnow.Format("2006-01-02T15:04:05.999999-07:00")),
+			want: fmt.Sprintf("{\"subdivision_code\":\"BF-KOP\",\"alpha_2_code\":\"BF\",\"international_name\":\"Koulpélogo\",\"category\":\"\",\"created_at\":\"%[1]s\",\"updated_at\":\"%[1]s\"}", tnow.Format("2006-01-02T15:04:05.999999Z07:00")),
 		},
 	}
 	for _, tt := range tests {
@@ -59,7 +59,7 @@ func TestSubdivisionCode_String(t *testing.T) {
 				UpdatedAt:         tt.fields.UpdatedAt,
 			}
 			if got := sc.String(); got != tt.want {
-				t.Errorf("SubdivisionCode.String() = %v, want %v", got, tt.want)
+				t.Errorf("SubdivisionCode.String() = %v, want = %v", got, tt.want)
 			}
 		})
 	}
@@ -92,7 +92,7 @@ func TestSubdivisionCodes_String(t *testing.T) {
 					UpdatedAt:         tnow,
 				},
 			},
-			want: fmt.Sprintf("[{\"subdivision_code\":\"BF-KOP\",\"alpha_2_code\":\"BF\",\"international_name\":\"Koulpélogo\",\"category\":\"Province\",\"created_at\":\"%[1]s\",\"updated_at\":\"%[1]s\"},{\"subdivision_code\":\"CA-QC\",\"alpha_2_code\":\"CA\",\"international_name\":\"Quebec\",\"category\":\"Province\",\"created_at\":\"%[1]s\",\"updated_at\":\"%[1]s\"}]", tnow.Format("2006-01-02T15:04:05.999999-07:00")),
+			want: fmt.Sprintf("[{\"subdivision_code\":\"BF-KOP\",\"alpha_2_code\":\"BF\",\"international_name\":\"Koulpélogo\",\"category\":\"Province\",\"created_at\":\"%[1]s\",\"updated_at\":\"%[1]s\"},{\"subdivision_code\":\"CA-QC\",\"alpha_2_code\":\"CA\",\"international_name\":\"Quebec\",\"category\":\"Province\",\"created_at\":\"%[1]s\",\"updated_at\":\"%[1]s\"}]", tnow.Format("2006-01-02T15:04:05.999999Z07:00")),
 		},
 	}
 	for _, tt := range tests {
