@@ -42,6 +42,8 @@ jobs:
       - restore_cache:
           keys:
             - go-mod-v1-{{ checksum "go.sum" }}
+            # if no full cache at least restore partial dependencies
+            - go-mod-v1-
       - run:
           name: Wait for DB
           # preinstalled in circleci/* docker image
@@ -63,7 +65,7 @@ jobs:
       - save_cache:
           key: go-mod-v1-{{ checksum "go.sum" }}
           paths:
-            - "/go/pkg/mod"
+            - "/go/pkg"
 
   # --------Inject ENV vars ----------
   inject_env_vars:
