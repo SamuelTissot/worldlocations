@@ -124,41 +124,23 @@ jobs:
 # ----------------------------------
 workflows:
   # -------- DEV and all branch (tests) ------------------
-  #  "mkt-wlio-dev":
-  #    jobs:
-  #      # clone repo
-  #      - gitclone:
-  #          filters:
-  #            branches:
-  #              ignore: master
-  #      # test and build.
-  #      - tests:
-  ##          context: mkt-wlio-dev
-  #          requires:
-  #            - gitclone
-  #          filters:
-  #            branches:
-  #              ignore: master
-  #      #setup environment variables for the App Engine
-  #      - inject_env_vars:
-  ##          context: mkt-wlio-dev
-  #          requires:
-  #            - gitclone
-  #          filters:
-  #            branches:
-  #              ignore: master
-  #deploy
-  #      - deploy:
+  "mkt-wlio-dev":
+    jobs:
+      # clone repo
+      - gitclone:
+          filters:
+            branches:
+              ignore: master
+      # test and build.
+      - tests:
   #          context: mkt-wlio-dev
-  #          requires:
-  #            - tests
-  #            - inject_env_vars
-  #          filters:
-  #            branches:
-  #              only: dev
+          requires:
+            - gitclone
+          filters:
+            branches:
+              ignore: master
 
-
-  # -------- prod ------------------
+  # -------- stg ------------------
   "mkt-wlio-stg":
     jobs:
       # clone repo
@@ -183,14 +165,14 @@ workflows:
             branches:
               only: master
       #deploy
-  #      - deploy:
-  #          context: wlio-stg
-  #          requires:
-  #            - tests
-  #            - inject_env_vars
-  #          filters:
-  #            branches:
-  #              only: master
+      - deploy:
+          context: wlio-stg
+          requires:
+            - tests
+            - inject_env_vars
+          filters:
+            branches:
+              only: master
 
 
   # -------- prod ------------------
