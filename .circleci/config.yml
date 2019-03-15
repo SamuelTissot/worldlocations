@@ -76,6 +76,11 @@ jobs:
           path:
             - app.yaml
       - run:
+          name: sqlproxy service account
+          command: |
+            mkdir -p secrets
+            echo $SQLPROXY_SERVICE_KEY >> secrets/wlio-sqlproxy-sa.json
+      - run:
           name:    appengine_deploy
           command: |
             printf "\n" >> app.yaml
@@ -89,6 +94,7 @@ jobs:
           root: .
           paths:
             - app.yaml
+            - secrets
 
 
   # -------- deploy ------------------
