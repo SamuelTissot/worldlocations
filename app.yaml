@@ -21,8 +21,3 @@ liveness_check:
   timeout_sec: 6
   failure_threshold: 2
   success_threshold: 2
-
-env_variables:
-  DATABASE_PASSWORD: "***REMOVED***"
-  SQL_INSTANCES_NAMES: "***REMOVED***"
-  GO_ENV: "production"
