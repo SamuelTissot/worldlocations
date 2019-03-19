@@ -83,6 +83,7 @@ func App() *buffalo.App {
 		v1.GET("subdivisions/{subdivision_code}/cities/", v1Handler(inquiry.subdivisionCities))
 
 		//default home controller
+		app.GET("/healthz", HealthzHandler)
 		app.GET("/", HomeHandler)
 
 	}

@@ -9,14 +9,14 @@ skip_files:
   - README.md
 
 readiness_check:
-  path:               "/"
+  path:               "/healthz"
   check_interval_sec: 30
   timeout_sec:        4
   failure_threshold:  2
   success_threshold:  2
 
 liveness_check:
-  path: "/"
+  path: "/healthz"
   check_interval_sec: 120
   timeout_sec: 6
   failure_threshold: 2
