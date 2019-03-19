@@ -140,7 +140,6 @@ workflows:
               ignore: master
       # test and build.
       - tests:
-  #          context: mkt-wlio-dev
           requires:
             - gitclone
           filters:
@@ -181,44 +180,43 @@ workflows:
               only: master
 
 
-  # -------- prod ------------------
-#  "mkt-wlio-prod":
-#    jobs:
-#      # clone repo
-#      - gitclone:
-#          filters:
-#            tags:
-#              only: /^v\d+\.\d+\.\d+/
-#            branches:
-#              ignore: /.*/
-#      # test and build.
-#      - tests:
-#          context: mkt-wlio-prod
-#          requires:
-#            - gitclone
-#          filters:
-#            tags:
-#              only: /^v\d+\.\d+\.\d+/
-#            branches:
-#              ignore: /.*/
-#      #setup environment variables for the App Engine
-#      - inject_env_vars:
-#          context: mkt-wlio-prod
-#          requires:
-#            - gitclone
-#          filters:
-#            tags:
-#              only: /^v\d+\.\d+\.\d+/
-#            branches:
-#              ignore: /.*/
-#      # deploy
-#      - deploy:
-#          context: mkt-wlio-prod
-#          requires:
-#            - tests
-#            - inject_env_vars
-#          filters:
-#            tags:
-#              only: /^v\d+\.\d+\.\d+/
-#            branches:
-#              ignore: /.*/
+    -------- prod ------------------
+  "mkt-wlio-prod":
+    jobs:
+      # clone repo
+      - gitclone:
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+/
+            branches:
+              ignore: /.*/
+      # test and build.
+      - tests:
+          requires:
+            - gitclone
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+/
+            branches:
+              ignore: /.*/
+      #setup environment variables for the App Engine
+      - inject_env_vars:
+          context: wlio-prod
+          requires:
+            - gitclone
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+/
+            branches:
+              ignore: /.*/
+      # deploy
+      - deploy:
+          context: wlio-prod
+          requires:
+            - tests
+            - inject_env_vars
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+/
+            branches:
+              ignore: /.*/
