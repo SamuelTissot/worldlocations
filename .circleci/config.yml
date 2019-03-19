@@ -179,43 +179,43 @@ workflows:
             branches:
               only: master
 
-    #-------- prod ------------------
-    "wlio-prod":
-      jobs:
-        # clone repo
-        - gitclone:
-            filters:
-              tags:
-                only: /^v\d+\.\d+\.\d+/
-              branches:
-                ignore: /.*/
-        # test and build.
-        - tests:
-            requires:
-              - gitclone
-            filters:
-              tags:
-                only: /^v\d+\.\d+\.\d+/
-              branches:
-                ignore: /.*/
-        #setup environment variables for the App Engine
-        - inject_env_vars:
-            context: wlio-prod
-            requires:
-              - gitclone
-            filters:
-              tags:
-                only: /^v\d+\.\d+\.\d+/
-              branches:
-                ignore: /.*/
-        # deploy
-        - deploy:
-            context: wlio-prod
-            requires:
-              - tests
-              - inject_env_vars
-            filters:
-              tags:
-                only: /^v\d+\.\d+\.\d+/
-              branches:
-                ignore: /.*/
+  #-------- prod ------------------
+  "wlio-prod":
+    jobs:
+      # clone repo
+      - gitclone:
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+/
+            branches:
+              ignore: /.*/
+      # test and build.
+      - tests:
+          requires:
+            - gitclone
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+/
+            branches:
+              ignore: /.*/
+      #setup environment variables for the App Engine
+      - inject_env_vars:
+          context: wlio-prod
+          requires:
+            - gitclone
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+/
+            branches:
+              ignore: /.*/
+      # deploy
+      - deploy:
+          context: wlio-prod
+          requires:
+            - tests
+            - inject_env_vars
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+/
+            branches:
+              ignore: /.*/
