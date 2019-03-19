@@ -5,4 +5,3 @@ World Locations I/O
 ###### redirects
 
 - [ ] \*/country/\* -> \*/countries/\*
-
