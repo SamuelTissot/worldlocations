@@ -157,7 +157,6 @@ workflows:
               only: master
       # test and build.
       - tests:
-          context: wlio-stg
           requires:
             - gitclone
           filters:
