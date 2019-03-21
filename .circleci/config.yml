@@ -146,32 +146,29 @@ workflows:
       # clone repo
       - gitclone:
           filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+-RC-\d+/
             branches:
-              tags:
-                only: /^v\d+\.\d+\.\d+-RC-\d+/
-              branches:
-                ignore: /.*/
+              ignore: /.*/
       # test and build.
       - tests:
           requires:
             - gitclone
           filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+-RC-\d+/
             branches:
-              tags:
-                only: /^v\d+\.\d+\.\d+-RC-\d+/
-              branches:
-                ignore: /.*/
+              ignore: /.*/
       #setup environment variables for the App Engine
       - inject_env_vars:
           context: wlio-stg
           requires:
             - gitclone
           filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+-RC-\d+/
             branches:
-              tags:
-                only: /^v\d+\.\d+\.\d+-RC-\d+/
-              branches:
-                ignore: /.*/
+              ignore: /.*/
       #deploy
       - deploy:
           context: wlio-stg
@@ -179,11 +176,10 @@ workflows:
             - tests
             - inject_env_vars
           filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+-RC-\d+/
             branches:
-              tags:
-                only: /^v\d+\.\d+\.\d+-RC-\d+/
-              branches:
-                ignore: /.*/
+              ignore: /.*/
 
   #-------- prod ------------------
   "wlio-prod":
