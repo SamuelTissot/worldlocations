@@ -149,8 +149,8 @@ workflows:
             branches:
               tags:
                 only: /^v\d+\.\d+\.\d+-RC-\d+/
-                branches:
-                  ignore: /.*/
+              branches:
+                ignore: /.*/
       # test and build.
       - tests:
           requires:
