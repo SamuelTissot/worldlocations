@@ -159,8 +159,8 @@ workflows:
             branches:
               tags:
                 only: /^v\d+\.\d+\.\d+-RC-\d+/
-                branches:
-                  ignore: /.*/
+              branches:
+                ignore: /.*/
       #setup environment variables for the App Engine
       - inject_env_vars:
           context: wlio-stg
@@ -170,8 +170,8 @@ workflows:
             branches:
               tags:
                 only: /^v\d+\.\d+\.\d+-RC-\d+/
-                branches:
-                  ignore: /.*/
+              branches:
+                ignore: /.*/
       #deploy
       - deploy:
           context: wlio-stg
@@ -182,8 +182,8 @@ workflows:
             branches:
               tags:
                 only: /^v\d+\.\d+\.\d+-RC-\d+/
-                branches:
-                  ignore: /.*/
+              branches:
+                ignore: /.*/
 
   #-------- prod ------------------
   "wlio-prod":
