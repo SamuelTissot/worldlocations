@@ -5,6 +5,16 @@ World Locations I/O
 | -------- |:------:|
 | master   | [![CircleCI](https://circleci.com/gh/SamuelTissot/worldlocations/tree/master.svg?style=svg)](https://circleci.com/gh/SamuelTissot/worldlocations/tree/master) |
 
+
+API Documentation
+----
+The API documentation is hosted with postman and can be viewed here
+
+[**WORLDLOCATIONS DOCUMENTATION**](https://documenter.getpostman.com/view/6999284/S17qTpUm)
+
+
+About
+----
 Worldlocations I/O is a personal project that I did in order to explore [Buffalo](https://github.com/gobuffalo/buffalo) 
 capabilities. Keeping this in mind I do not guaranty the full accuracy of the data returned by the API. However, if any 
 discrepancies or omission are notice, I will be more than happy to correct then. Please submit an issue on the github 
