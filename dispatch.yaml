@@ -1,0 +1,4 @@
+dispatch:
+  #  worldlocation
+  - url: "*worldlocations.io/*"
+    service: default
