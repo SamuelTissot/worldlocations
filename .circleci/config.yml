@@ -134,17 +134,11 @@ workflows:
   "wlio-dev":
     jobs:
       # clone repo
-      - gitclone:
-          filters:
-            branches:
-              ignore: *
+      - gitclone
       # test and build.
       - tests:
           requires:
             - gitclone
-          filters:
-            branches:
-              ignore: *
 
   # -------- stg ------------------
   "wlio-stg":
