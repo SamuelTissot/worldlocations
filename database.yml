@@ -17,26 +17,9 @@ test:
 
 
 production:
-  #
-  # You can also use environmental variables to override values in this config.
-  #
-  #url: {{envOr "DATABASE_URL" "mysql://root:root@(localhost:3306)/worldlocations_production?parseTime=true&multiStatements=true&readTimeout=3s"}}
-  #
   dialect: "mysql"
   database: "worldlocations_production"
   host: {{envOr "DATABASE_HOST" "127.0.0.1"}}
   port: {{envOr "DATABASE_PORT" "3306"}}
   user: {{envOr "DATABASE_USER" "proxyuser"}}
   password: {{envOr "DATABASE_PASSWORD" "root"}}
-  #
-  # And you can also override connection parameters by setting it under options.
-  #
-  #options:
-  #  parseTime: true
-  #  multiStatements: true
-  #  readTimeout: 3s
-  #  encoding: "utf8mb4_general_ci"
-  #
-  # CAUTION!
-  #   `parseTime` and` multiStatements` must be set to `true` to work properly.
-  #   If you are not sure, do not change (or set) these values.
