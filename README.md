@@ -18,7 +18,7 @@ About
 Worldlocations I/O is a personal project that I did in order to explore [Buffalo](https://github.com/gobuffalo/buffalo) 
 capabilities. Keeping this in mind I do not guaranty the full accuracy of the data returned by the API. However, if any 
 discrepancies or omission are notice, I will be more than happy to correct then. Please submit an issue on the github 
-repo. 
+repo.
 
 Thanks.
  
@@ -52,6 +52,18 @@ it is also possible to query cities of subdivisions.
 
 ```
 
+Worldlocations in Numbers
+----
+
+
+| section | records |
+|:------|------:|
+| countries | 273* |
+| subdivisions | 5194 |
+| languages | 104 |
+| cities | 186455 |
+
+* includes none official zones 
 
 Authentication
 ---
