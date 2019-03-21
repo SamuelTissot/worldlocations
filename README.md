@@ -1,6 +1,10 @@
 World Locations I/O
 ===
 
+| branch   | status |
+| -------- |:------:|
+| master   | [![CircleCI](https://circleci.com/gh/SamuelTissot/worldlocations/tree/master.svg?style=svg)](https://circleci.com/gh/SamuelTissot/worldlocations/tree/master) |
+
 Worldlocations I/O is a personal project that I did in order to explore [Buffalo](https://github.com/gobuffalo/buffalo) 
 capabilities. Keeping this in mind I do not guaranty the full accuracy of the data returned by the API. However, if any 
 discrepancies or omission are notice, I will be more than happy to correct then. Please submit an issue on the github 
