@@ -701,3 +701,15 @@ func (as *ActionSuite) Test_subdivisionCities() {
 		as.Equal(string(wStr), strings.TrimSpace(string(res.Body.Bytes())))
 	}
 }
+
+func (as *ActionSuite) Test_500_error() {
+	res := as.JSON("/generate-error/").Get()
+	as.Equal(500, res.Code)
+	as.Contains(res.Body.String(), "(╯°□°）╯︵ ┻━┻  unknown error")
+}
+
+func (as *ActionSuite) Test_404_notfound() {
+	res := as.JSON("/badrequest/").Get()
+	as.Equal(404, res.Code)
+	as.Contains(res.Body.String(), "「(°ヘ°) resource not found")
+}

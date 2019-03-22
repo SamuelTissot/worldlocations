@@ -58,6 +58,16 @@ func App() *buffalo.App {
 		// Remove to disable this.
 		app.Use(popmw.Transaction(models.DB))
 
+		// Error handling
+
+		app.ErrorHandlers[500] = func(status int, err error, c buffalo.Context) error {
+			return c.Render(500, r.JSON(map[string]string{"message": "(╯°□°）╯︵ ┻━┻  unknown error"}))
+		}
+
+		app.ErrorHandlers[404] = func(status int, err error, c buffalo.Context) error {
+			return c.Render(404, r.JSON(map[string]string{"message": "「(°ヘ°) resource not found"}))
+		}
+
 		//v1 groupe
 		v1 := app.Group("/v1")
 		// countries
@@ -84,6 +94,7 @@ func App() *buffalo.App {
 
 		//default home controller
 		app.GET("/healthz", HealthzHandler)
+		app.GET("/generate-error", ErrorExample)
 		app.GET("/", HomeHandler)
 
 	}

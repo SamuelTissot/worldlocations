@@ -28,5 +28,10 @@ func (h *V1Handler) do(c buffalo.Context) error {
 	}
 	h.Count = res.Count()
 	h.Data = res
-	return c.Render(200, r.JSON(h))
+
+	respCode := 200
+	if h.Count == 0 {
+		respCode = 204
+	}
+	return c.Render(respCode, r.JSON(h))
 }
