@@ -7,7 +7,7 @@ import (
 )
 
 type CountryName struct {
-	ID                 int          `db:"id"`
+	ID                 int          `json:"id" db:"id"`
 	Alpha2Code         string       `json:"alpha_2_code" db:"alpha_2_code"`
 	LanguageAlpha2Code string       `json:"language_alpha_2_code" db:"language_alpha_2_code"`
 	Name               string       `json:"name" db:"name"`
