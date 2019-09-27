@@ -20,3 +20,9 @@ func init() {
 	}
 	pop.Debug = env == "development"
 }
+
+type Model interface {
+	Count() int
+	//Paginate returns the the correct page element and true if their is more page
+	Paginate(p, count int) (Model, bool)
+}

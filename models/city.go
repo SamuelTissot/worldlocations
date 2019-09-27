@@ -36,3 +36,13 @@ func (cs *Cities) String() string {
 func (cs Cities) Count() int {
 	return len(cs)
 }
+
+func (cs Cities) Paginate(p, count int) (Model, bool) {
+	if cs.Count() <= (p-1)*count {
+		return Cities{}, false
+	}
+	if cs.Count() > count {
+		return cs[(p-1)*count : p*count], true
+	}
+	return cs[(p-1)*count:], false
+}

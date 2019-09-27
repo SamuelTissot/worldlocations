@@ -5,7 +5,6 @@ import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
 	"github.com/pkg/errors"
-	"strconv"
 	"strings"
 	"worldlocations/models"
 )
@@ -57,7 +56,7 @@ func (i *Inquiry) where(model interface{}, stmt string, args ...interface{}) fun
  */
 
 // countryList lists all countries
-func (i *Inquiry) countryList(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) countryList(c buffalo.Context) (models.Model, error) {
 	model := &models.CountryCodes{}
 	if err := i.fetch(c, i.all(model)); err != nil {
 		fmt.Println(err)
@@ -68,7 +67,7 @@ func (i *Inquiry) countryList(c buffalo.Context) (Countable, error) {
 }
 
 // countryShow returns the country with alpha_2_code
-func (i *Inquiry) countryShow(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) countryShow(c buffalo.Context) (models.Model, error) {
 	model := &models.CountryCodes{}
 	if err := i.fetch(c, i.where(model, "alpha_2_code = (?)", strings.ToUpper(c.Param("alpha_2_code")))); err != nil {
 		return nil, err
@@ -82,7 +81,7 @@ func (i *Inquiry) countryShow(c buffalo.Context) (Countable, error) {
  *
  */
 // countriesNamesList list all the countries names variations
-func (i *Inquiry) countriesNamesList(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) countriesNamesList(c buffalo.Context) (models.Model, error) {
 	model := &models.CountryNames{}
 	if err := i.fetch(c, i.all(model)); err != nil {
 		return nil, err
@@ -91,7 +90,7 @@ func (i *Inquiry) countriesNamesList(c buffalo.Context) (Countable, error) {
 }
 
 // countryNames returns all the name for a country code (alpha_2_code)
-func (i *Inquiry) countryNames(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) countryNames(c buffalo.Context) (models.Model, error) {
 	model := &models.CountryNames{}
 	if err := i.fetch(c, i.where(model, "alpha_2_code = (?)", strings.ToUpper(c.Param("alpha_2_code")))); err != nil {
 		return nil, err
@@ -106,7 +105,7 @@ func (i *Inquiry) countryNames(c buffalo.Context) (Countable, error) {
  */
 
 // subdivisionNamesList returns all subdivision names
-func (i *Inquiry) subdivisionNamesList(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) subdivisionNamesList(c buffalo.Context) (models.Model, error) {
 	model := &models.SubdivisionNames{}
 	if err := i.fetch(c, i.all(model)); err != nil {
 		return nil, err
@@ -115,7 +114,7 @@ func (i *Inquiry) subdivisionNamesList(c buffalo.Context) (Countable, error) {
 }
 
 // subdivisionNamesShow returns a single subdivision name based on subdivision_code
-func (i *Inquiry) subdivisionNamesShow(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) subdivisionNamesShow(c buffalo.Context) (models.Model, error) {
 	model := &models.SubdivisionNames{}
 	if err := i.fetch(c, i.where(model, "subdivision_code = (?)", strings.ToUpper(c.Param("subdivision_code")))); err != nil {
 		return nil, err
@@ -130,7 +129,7 @@ func (i *Inquiry) subdivisionNamesShow(c buffalo.Context) (Countable, error) {
  */
 
 // subdivisionsList returns all subdivision
-func (i *Inquiry) subdivisionList(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) subdivisionList(c buffalo.Context) (models.Model, error) {
 	model := &models.SubdivisionCodes{}
 	if err := i.fetch(c, i.all(model)); err != nil {
 		return nil, err
@@ -139,7 +138,7 @@ func (i *Inquiry) subdivisionList(c buffalo.Context) (Countable, error) {
 }
 
 // subdivisionShow returns a single subdivision for subdivision_code
-func (i *Inquiry) subdivisionShow(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) subdivisionShow(c buffalo.Context) (models.Model, error) {
 	model := &models.SubdivisionCodes{}
 	if err := i.fetch(c, i.where(model, "subdivision_code = (?)", strings.ToUpper(c.Param("subdivision_code")))); err != nil {
 		return nil, err
@@ -148,7 +147,7 @@ func (i *Inquiry) subdivisionShow(c buffalo.Context) (Countable, error) {
 }
 
 // subdivisionShow returns a single subdivision for subdivision_code
-func (i *Inquiry) countrySubdivisions(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) countrySubdivisions(c buffalo.Context) (models.Model, error) {
 	model := &models.SubdivisionCodes{}
 	if err := i.fetch(c, i.where(model, "alpha_2_code = (?)", strings.ToUpper(c.Param("alpha_2_code")))); err != nil {
 		return nil, err
@@ -162,7 +161,7 @@ func (i *Inquiry) countrySubdivisions(c buffalo.Context) (Countable, error) {
  *
  */
 // languagesList lists all the languages
-func (i *Inquiry) languagesList(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) languagesList(c buffalo.Context) (models.Model, error) {
 	model := &models.LanguageCodes{}
 	if err := i.fetch(c, i.all(model)); err != nil {
 		return nil, err
@@ -171,7 +170,7 @@ func (i *Inquiry) languagesList(c buffalo.Context) (Countable, error) {
 }
 
 // languagesShow returns languages for language_alpha_2_code
-func (i *Inquiry) languagesShow(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) languagesShow(c buffalo.Context) (models.Model, error) {
 	model := &models.LanguageCodes{}
 	if err := i.fetch(c, i.where(model, "language_alpha_2_code = (?)", strings.ToLower(c.Param("language_alpha_2_code")))); err != nil {
 		return nil, err
@@ -186,25 +185,16 @@ func (i *Inquiry) languagesShow(c buffalo.Context) (Countable, error) {
  */
 
 // citiesList lists all the cities
-func (i *Inquiry) citiesList(c buffalo.Context) (Countable, error) {
-	p := c.Param("p")
-	if p == "" {
-		p = "1"
-	}
-	pn, err := strconv.Atoi(p)
-	if err != nil {
-		return nil, err
-	}
-
+func (i *Inquiry) citiesList(c buffalo.Context) (models.Model, error) {
 	model := &models.Cities{}
-	if err := i.fetch(c, i.page(model, pn)); err != nil {
+	if err := i.fetch(c, i.all(model)); err != nil {
 		return nil, err
 	}
 	return model, nil
 }
 
 // citiesShow returns the city with id = ?
-func (i *Inquiry) citiesShow(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) citiesShow(c buffalo.Context) (models.Model, error) {
 	model := &models.Cities{}
 	if err := i.fetch(c, i.where(model, "id = (?)", c.Param("id"))); err != nil {
 		return nil, err
@@ -213,7 +203,7 @@ func (i *Inquiry) citiesShow(c buffalo.Context) (Countable, error) {
 }
 
 // countryCities returns all the cities of a country
-func (i *Inquiry) countryCities(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) countryCities(c buffalo.Context) (models.Model, error) {
 	model := &models.Cities{}
 	if err := i.fetch(c, i.where(model, "alpha_2_code = (?)", strings.ToUpper(c.Param("alpha_2_code")))); err != nil {
 		return nil, err
@@ -222,7 +212,7 @@ func (i *Inquiry) countryCities(c buffalo.Context) (Countable, error) {
 }
 
 // subdivisionCities returns all the cities of a subdivision
-func (i *Inquiry) subdivisionCities(c buffalo.Context) (Countable, error) {
+func (i *Inquiry) subdivisionCities(c buffalo.Context) (models.Model, error) {
 	model := &models.Cities{}
 	if err := i.fetch(c, i.where(model, "subdivision_code = (?)", strings.ToUpper(c.Param("subdivision_code")))); err != nil {
 		return nil, err

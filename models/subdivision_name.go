@@ -30,3 +30,13 @@ func (sns SubdivisionNames) String() string {
 func (sns SubdivisionNames) Count() int {
 	return len(sns)
 }
+
+func (sns SubdivisionNames) Paginate(p, count int) (Model, bool) {
+	if sns.Count() < (p-1)*count {
+		return SubdivisionNames{}, false
+	}
+	if sns.Count() > count {
+		return sns[(p-1)*count : p*count], true
+	}
+	return sns[(p-1)*count:], false
+}

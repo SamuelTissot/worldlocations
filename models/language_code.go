@@ -27,3 +27,13 @@ func (lcs LanguageCodes) String() string {
 func (lcs LanguageCodes) Count() int {
 	return len(lcs)
 }
+
+func (lcs LanguageCodes) Paginate(p, count int) (Model, bool) {
+	if lcs.Count() < (p-1)*count {
+		return LanguageCodes{}, false
+	}
+	if lcs.Count() > count {
+		return lcs[(p-1)*count : p*count], true
+	}
+	return lcs[(p-1)*count:], false
+}

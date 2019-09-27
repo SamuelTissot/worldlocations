@@ -33,3 +33,13 @@ func (scs SubdivisionCodes) String() string {
 func (scs SubdivisionCodes) Count() int {
 	return len(scs)
 }
+
+func (scs SubdivisionCodes) Paginate(p, count int) (Model, bool) {
+	if scs.Count() < (p-1)*count {
+		return SubdivisionCodes{}, false
+	}
+	if scs.Count() > count {
+		return scs[(p-1)*count : p*count], true
+	}
+	return scs[(p-1)*count:], false
+}

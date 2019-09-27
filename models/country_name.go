@@ -34,3 +34,13 @@ func (cns CountryNames) String() string {
 func (cns CountryNames) Count() int {
 	return len(cns)
 }
+
+func (cns CountryNames) Paginate(p, count int) (Model, bool) {
+	if cns.Count() < (p-1)*count {
+		return CountryNames{}, false
+	}
+	if cns.Count() > count {
+		return cns[(p-1)*count : p*count], true
+	}
+	return cns[(p-1)*count:], false
+}
