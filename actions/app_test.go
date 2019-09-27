@@ -311,17 +311,17 @@ func (as *ActionSuite) Test_CountrySubdivisions() {
 				Count: 2,
 				Data: models.SubdivisionCodes{
 					models.SubdivisionCode{
-						SubdivisionCode:   "CA-ON",
+						SubdivisionCode:   "CA-QC",
 						Alpha2Code:        "CA",
-						InternationalName: "Ontario",
+						InternationalName: "Quebec",
 						Category:          nulls.NewString("Province"),
 						CreatedAt:         testTime,
 						UpdatedAt:         testTime,
 					},
 					models.SubdivisionCode{
-						SubdivisionCode:   "CA-QC",
+						SubdivisionCode:   "CA-ON",
 						Alpha2Code:        "CA",
-						InternationalName: "Quebec",
+						InternationalName: "Ontario",
 						Category:          nulls.NewString("Province"),
 						CreatedAt:         testTime,
 						UpdatedAt:         testTime,

@@ -1,25 +1,11 @@
 development:
-  dialect: "mysql"
-  database: "worldlocations_development"
-  host: "docker.for.mac.localhost"
-  port: "6603"
-  user: "root"
-  password: "mypassword"
-
+  dialect: "sqlite3"
+  database: "/var/databases/worldlocations_production.sqlite"
 
 test:
-  dialect: "mysql"
-  database: {{envOr "TEST_DATABASE_NAME" "worldlocations_test"}}
-  host: {{envOr "TEST_DATABASE_HOST" "127.0.0.1"}}
-  port: {{envOr "TEST_DATABASE_PORT" "6603"}}
-  user: {{envOr "TEST_DATABASE_USER" "root"}}
-  password: {{envOr "TEST_DATABASE_PASSWORD" "mypassword"}}
-
+  dialect: "sqlite3"
+  database: "/var/databases/worldlocations_test.sqlite"
 
 production:
-  dialect: "mysql"
-  database: "worldlocations_production"
-  host: {{envOr "DATABASE_HOST" "127.0.0.1"}}
-  port: {{envOr "DATABASE_PORT" "3306"}}
-  user: {{envOr "DATABASE_USER" "proxyuser"}}
-  password: {{envOr "DATABASE_PASSWORD" "root"}}
+  dialect: "sqlite3"
+  database: "/var/databases/worldlocations_production.sqlite"
