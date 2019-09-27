@@ -54,7 +54,10 @@ jobs:
             buffalo plugins install github.com/gobuffalo/buffalo-pop
       - run:
           name: provision test database
-          command: buffalo pop migrate reset -e test
+          command: |
+            mkdir -p var/databases
+            touch /var/databases/worldlocations_test.sqlite
+            buffalo pop reset -e test
       # Test
       - run: go test -v ./...
       # save cache
