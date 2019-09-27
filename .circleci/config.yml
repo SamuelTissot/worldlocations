@@ -55,7 +55,7 @@ jobs:
       - run:
           name: provision test database
           command: |
-            mkdir -p var/databases
+            mkdir -p /var/databases
             touch /var/databases/worldlocations_test.sqlite
             buffalo pop reset -e test
       # Test
