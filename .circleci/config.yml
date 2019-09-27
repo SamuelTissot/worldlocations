@@ -55,11 +55,11 @@ jobs:
       - run:
           name: provision test database
           command: |
-            mkdir -p /var/databases
-            touch /var/databases/worldlocations_test.sqlite
+            mkdir -p /tmp/databases
+            touch /tmp/databases/worldlocations_test.sqlite
             buffalo pop reset -e test
       # Test
-      - run: go test -v ./...
+      - run: GO_ENV=test go test -v -tags sqlite ./...
       # save cache
       - save_cache:
           key: go-mod-v1-{{ checksum "go.sum" }}

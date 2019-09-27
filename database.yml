@@ -4,7 +4,7 @@ development:
 
 test:
   dialect: "sqlite3"
-  database: "/var/databases/worldlocations_test.sqlite"
+  database: "/tmp/databases/worldlocations_test.sqlite"
 
 production:
   dialect: "sqlite3"
