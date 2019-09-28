@@ -1,6 +1,13 @@
 # This is a multi-stage Dockerfile and requires >= Docker 17.05
 # https://docs.docker.com/engine/userguide/eng-image/multistage-build/
-FROM gobuffalo/buffalo:v0.14.0 as builder
+
+##
+# NOTE
+# this repo can be easily built with the
+# FROM gobuffalo/buffalo:v0.14.0 as builder
+# but the database will be missing
+# I cannot share the database because I do not have the right to distribute
+FROM gcr.io/worldlocation-io/worldlocations-db:v0.0.1 as builder
 
 RUN mkdir -p $GOPATH/src/worldlocations
 WORKDIR $GOPATH/src/worldlocations
