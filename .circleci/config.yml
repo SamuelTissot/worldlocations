@@ -76,10 +76,9 @@ jobs:
       - gcp-cli/initialize:
           google-project-id:   $GCLOUD_PROJECT_ID
           google-compute-zone: $GCLOUD_PROJECT_REGION
-      - run: echo ${GCLOUD_SERVICE_KEY} > ${HOME}/gcp-key.json
       - run: |
           appversion=$(echo $CIRCLE_SHA1 | cut -c1-7) || appversion=$(echo $CIRCLE_TAG | tr . -)
-          gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
+          gcloud auth activate-service-account circleci@worldlocation-io.iam.gserviceaccount.com --key-file=${HOME}/gcloud-service-key.json
           gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
           gcloud config set compute/zone $GCLOUD_PROJECT_REGION
           docker build --rm=false -t gcr.io/${GCLOUD_PROJECT_ID}/worldlocations:${appversion} .
@@ -103,7 +102,6 @@ jobs:
 #          command:           |
 #            [ -z "$CIRCLE_TAG" ] && appversion=$(echo $CIRCLE_SHA1 | cut -c1-7) || appversion=$(echo $CIRCLE_TAG | tr . -)
 #            set -o pipefail
-#            gcloud auth activate-service-account circleci@worldlocation-io.iam.gserviceaccount.com --key-file=${HOME}/gcloud-service-key.json
 #            sudo apt-get install google-cloud-sdk-app-engine-go -y
 #            gcloud config set project $GCLOUD_PROJECT_ID
 #            gcloud app deploy -v $appversion -q
