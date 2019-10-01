@@ -1,6 +1,13 @@
 # This is a multi-stage Dockerfile and requires >= Docker 17.05
 # https://docs.docker.com/engine/userguide/eng-image/multistage-build/
-FROM gobuffalo/buffalo:v0.14.0 as builder
+
+##
+# NOTE
+# this repo can be easily built with the
+# FROM gobuffalo/buffalo:v0.14.0 as builder
+# but the database will be missing
+# I cannot share the database because I do not have the right to distribute
+FROM gcr.io/worldlocation-io/worldlocations-db:v0.0.2 as builder
 
 RUN mkdir -p $GOPATH/src/worldlocations
 WORKDIR $GOPATH/src/worldlocations
@@ -18,9 +25,7 @@ RUN apk add --no-cache wget
 WORKDIR /app_src
 
 COPY --from=builder /app_src .
-
-RUN mkdir -p /var/databases
-COPY databases/worldlocations_production.sqlite /var/databases/worldlocations_production.sqlite
+COPY --from=builder /var/databases /var/databases
 
 # Uncomment to run the binary in "production" mode:
 

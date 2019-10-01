@@ -21,7 +21,7 @@ CREATE TABLE subdivision_codes
     category           VARCHAR(50),
     created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (alpha_2_code) REFERENCES country_codes (alpha_2_code)
+    FOREIGN KEY (alpha_2_code) REFERENCES country_codes (alpha_2_code) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE cities
 (
@@ -36,7 +36,7 @@ CREATE TABLE cities
     created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (alpha_2_code) REFERENCES country_codes (alpha_2_code),
-    FOREIGN KEY (subdivision_code) REFERENCES language_codes (language_alpha_2_code)
+    FOREIGN KEY (subdivision_code) REFERENCES language_codes (language_alpha_2_code) ON DELETE CASCADE
 );
 CREATE TABLE language_codes
 (
@@ -53,8 +53,8 @@ CREATE TABLE subdivision_names
     local_variation       VARCHAR,
     created_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at            TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (subdivision_code) REFERENCES subdivision_codes (subdivision_code),
-    FOREIGN KEY (language_alpha_2_code) REFERENCES language_codes (language_alpha_2_code),
+    FOREIGN KEY (subdivision_code) REFERENCES subdivision_codes (subdivision_code) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (language_alpha_2_code) REFERENCES language_codes (language_alpha_2_code) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (subdivision_code, language_alpha_2_code)
 );
 CREATE TABLE country_languages
