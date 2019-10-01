@@ -65,7 +65,7 @@ jobs:
           paths:
             - "/go/pkg"
 
-  # --------Inject ENV vars ----------
+  # -------- build docker image ----------
   docker_push:
     executor: workhorse
     steps:
@@ -84,28 +84,19 @@ jobs:
           docker build --rm=false -t gcr.io/${GCLOUD_PROJECT_ID}/worldlocations:${appversion} .
           gcloud docker -- push gcr.io/${GCLOUD_PROJECT_ID}/worldlocations:${appversion}
 
-
-  # -------- deploy ------------------
+  # -------- deploy ----------
   deploy:
     executor: workhorse
     steps:
-      - attach_workspace:
-          at: .
-          path:
-            - Dockerfile
-            - app.yaml
-            - secrets
-            - bin
-#      - run:
-#          name:              "deploy to app engine"
-#          no_output_timeout: 20m # sometime app engine is a bit slow :/
-#          command:           |
-#            [ -z "$CIRCLE_TAG" ] && appversion=$(echo $CIRCLE_SHA1 | cut -c1-7) || appversion=$(echo $CIRCLE_TAG | tr . -)
-#            set -o pipefail
-#            sudo apt-get install google-cloud-sdk-app-engine-go -y
-#            gcloud config set project $GCLOUD_PROJECT_ID
-#            gcloud app deploy -v $appversion -q
-
+      - gcp-cli/install
+      - gcp-cli/initialize:
+          google-project-id:   $GCLOUD_PROJECT_ID
+          google-compute-zone: $GCLOUD_PROJECT_REGION
+      - run: |
+          appversion=$(echo $CIRCLE_SHA1 | cut -c1-7) || appversion=$(echo $CIRCLE_TAG | tr . -)
+          gcloud auth activate-service-account circleci-wlio@worldlocation-io.iam.gserviceaccount.com --key-file=${HOME}/gcloud-service-key.json
+          gcloud config set compute/zone $GCLOUD_PROJECT_REGION
+          gcloud beta run --image gcr.io/${GCLOUD_PROJECT_ID}/worldlocations:${appversion}
 
 
 # ----------------------------------
@@ -121,11 +112,6 @@ workflows:
       - tests:
           requires:
             - gitclone
-      - docker_push:
-          context: wlio-stg
-          requires:
-            - gitclone
-            - tests
 
   # -------- stg ------------------
   "wlio-stg":
@@ -150,24 +136,12 @@ workflows:
       - docker_push:
           context: wlio-stg
           requires:
-            - gitclone
             - tests
           filters:
             tags:
               only: /^v\d+\.\d+\.\d+-RC-\d+/
             branches:
               ignore: /.*/
-      #deploy
-#      - deploy:
-#          context: wlio-stg
-#          requires:
-#            - tests
-#            - inject_env_vars
-#          filters:
-#            tags:
-#              only: /^v\d+\.\d+\.\d+-RC-\d+/
-#            branches:
-#              ignore: /.*/
 
   #-------- prod ------------------
   "wlio-prod":
@@ -192,7 +166,6 @@ workflows:
       - docker_push:
           context: wlio-prod
           requires:
-            - gitclone
             - tests
           filters:
             tags:
@@ -200,13 +173,12 @@ workflows:
             branches:
               ignore: /.*/
       # deploy
-#      - deploy:
-#          context: wlio-prod
-#          requires:
-#            - tests
-#            - inject_env_vars
-#          filters:
-#            tags:
-#              only: /^v\d+\.\d+\.\d+/
-#            branches:
-#              ignore: /.*/
+      - deploy:
+          context: wlio-prod
+          requires:
+            - docker_push
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+/
+            branches:
+              ignore: /.*/
